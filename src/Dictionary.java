@@ -6,4 +6,5 @@ public class Dictionary {
     {
         words = new ArrayList<Word>();
     }
+    int i = 5;
 }
