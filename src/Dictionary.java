@@ -1,3 +1,9 @@
+import java.util.ArrayList;
+
 public class Dictionary {
-    Word[] dictionary = new Word[1000];
+    ArrayList<Word> words;
+
+    {
+        words = new ArrayList<Word>();
+    }
 }
