@@ -18,8 +18,4 @@ public class Word {
         return word_target;
     }
 
-    Word(String word_target, String word_explain){
-        setWord_explain(word_explain);
-        setWord_target(word_target);
-    }
 }
