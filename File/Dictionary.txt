@@ -1,0 +1,4 @@
+Cat	Mèo
+Dog	Chó
+Hello	Xin chào
+House	Ngôi nhà

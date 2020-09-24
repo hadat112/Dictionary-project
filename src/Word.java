@@ -22,4 +22,7 @@ public class Word {
         setWord_explain(word_explain);
         setWord_target(word_target);
     }
+    /*public void printWord(){
+        System.out.println("|"+word_target+"  |"+word_explain);
+    }*/
 }

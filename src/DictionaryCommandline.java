@@ -1,22 +1,36 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class DictionaryCommandline {
-    DictionaryManagement d = new DictionaryManagement();
-    public void showAllWords(){
-        for(int i = 0; i < d.dictionary.words.size(); i++){
-            System.out.println(d.dictionary.words.get(i).getWord_target()
-                    + " " + d.dictionary.words.get(i).getWord_explain());
+    private DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    private Scanner scanner = new Scanner(System.in);
+
+    public void showAllWords() {
+        int n = dictionaryManagement.getDictionarySize();
+        ArrayList<Word> wordList = dictionaryManagement.getWordsList();
+        System.out.println("No  |English     |Vietnamese");
+        for (int i = 0; i < n; i++) {
+            System.out.println(i + "   |" + wordList.get(i).getWord_target() + "          |" + wordList.get(i).getWord_explain());
         }
     }
 
-    public void dictionaryBasic(Word word){
-        d.insertFromCommandline(word);
-        showAllWords();
+    public void dictionaryBasic() {
+        System.out.println("Cac lenh: \"show\" de xem danh sach cac tu, \"add\" de them tu");
+        String command = scanner.next();
+        String s = scanner.nextLine();
+        while (!command.equals("exit")) {
+            if (command.equals("show")) {
+                showAllWords();
+            } else if (command.equals("add")) {
+                System.out.print("Nhap tu: ");
+                String newWord = scanner.nextLine();
+                System.out.print("Nhap nghia: ");
+                String mean = scanner.nextLine();
+                Word word = new Word(newWord,mean);
+                dictionaryManagement.insertFromCommandline(word);
+            }
+            command = scanner.next();
+        }
     }
 
-    public static void main(String[] args) {
-        Word word = new Word("hadat", "depzaivcl");
-        Word word1 = new Word("hung", "occho");
-        DictionaryCommandline d = new DictionaryCommandline();
-        d.dictionaryBasic(word);
-        d.dictionaryBasic(word1);
-    }
 }
