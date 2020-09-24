@@ -1,16 +1,25 @@
 import java.util.ArrayList;
 
 public class Dictionary {
-    private ArrayList<Word> words = new ArrayList<>();
+    //Khởi tạo mảng động chứa các đối tượng word.
+    private static ArrayList<Word> words = new ArrayList<>();
+
+    //Thêm từ vào mảng.
     public void addWord(Word word){
         words.add(word);
     }
+
+    //Xóa từ
     public void deleteWord(Word word){
         words.remove(word);
     }
+
+    //Lấy kích thước mảng, số lượng từ
     public int getSize(){
         return words.size();
     }
+
+    //Lấy danh sách từ.
     public ArrayList<Word> getWordsList(){
         return words;
     }
