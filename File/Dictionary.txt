@@ -1,0 +1,5 @@
+Abstract    Trừu tượng
+Cat   Con Mèo
+Dog   Con Chó
+Cow   Con Bò
+Hello   Xin chào
