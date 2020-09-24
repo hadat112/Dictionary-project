@@ -11,7 +11,7 @@ public class Dictionary {
 
     //Xóa từ
     public void deleteWord(Word word){
-        words.remove(word);
+        getWordsList().remove(word);
     }
 
     //Lấy kích thước mảng, số lượng từ

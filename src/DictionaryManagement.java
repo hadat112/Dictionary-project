@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class DictionaryManagement {
@@ -26,13 +27,13 @@ public class DictionaryManagement {
     }
 
     //Nhập từ từ file vào mảng chứa
-    public void insertFromFile(){
+    public void insertFromFile() {
         String string;
         //File
-        try{
+        try {
             //Khai báo fileIn để đọc dữ liệu từ file
             Scanner fileIn = new Scanner(file);
-            while (fileIn.hasNextLine()){
+            while (fileIn.hasNextLine()) {
                 //Đọc từng dòng của file
                 string = fileIn.nextLine();
                 //Tách dòng đó thành mảng 2 phần tử qua dấu tab
@@ -40,27 +41,42 @@ public class DictionaryManagement {
                 insertFromCommandline(new Word(str[0], str[1]));
                 //System.out.println(str[0]+" "+str[1]);
             }
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("File not found!");
         }
     }
 
+    public void dictionaryExportToFile() {
+        try {
+            Formatter f = new Formatter("D:/java/Dictionary/File/Dictionary.txt");
+
+            ArrayList<Word> words = dictionary.getWordsList();
+            for(int i=0;i<dictionary.getSize();i++){
+                f.format("%s   %s   %s", words.get(i).getWord_target()
+                                    , words.get(i).getWord_explain(), "\r\n");
+            }
+            f.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+        }
+    }
+
     //Tìm nghĩa tiếng Việt của từ tiếng Anh
-    public void dictionaryLookup(String word_target){
-        String word_explain;
+    public String dictionaryLookup(String word_target) {
+        String word_explain = "";
         //Lấy mảng chứa các từ
         ArrayList<Word> words = dictionary.getWordsList();
         //Duyệt từng phần tử để tìm từ có từng tiếng Anh tương ứng
-        for(Word word : words){
+        for (Word word : words) {
             //Nếu tìm thấy gắn nó vào word_explain rồi thoát khỏi phương thức
-            if(word.getWord_target().toLowerCase().equals(word_target) || word.getWord_target().equals(word_target)){
-                word_explain=word.getWord_explain();
-                System.out.println("Nghia cua tu "+word_target+" la: "+word_explain);
-                return;
+            if (word.getWord_target().toLowerCase().equals(word_target) || word.getWord_target().equals(word_target)) {
+                word_explain = word.getWord_explain();
+                return word_explain;
             }
         }
         //Nếu không tìm thấy
         System.out.println("Không tìm thấy từ");
+        return word_explain;
     }
 
 }

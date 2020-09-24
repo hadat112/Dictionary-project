@@ -9,10 +9,10 @@ public class DictionaryCommandline {
 
     //Hiển thị tất cả các từ trong mảng
     public void showAllWords() {
-        //Lấy kích cỡ mảng
-        int n = dictionaryManagement.getDictionarySize();
         //Lấy mảng chứa các từ
         ArrayList<Word> wordList = dictionaryManagement.getWordsList();
+        //Lấy kích cỡ mảng
+        int n = dictionaryManagement.getDictionarySize();
         //In ra các từ
         System.out.println("No  |English     |Vietnamese");
         for (int i = 0; i < n; i++) {
@@ -20,12 +20,25 @@ public class DictionaryCommandline {
         }
     }
 
+    // Tim kiếm các từ.
+    public void dictionarySearcher(String str){
+        ArrayList<Word> wordList = dictionaryManagement.getWordsList();
+        //Lấy kích cỡ mảng
+        int n = dictionaryManagement.getDictionarySize();
+        System.out.print(str + ": ");
+        for (int i = 0; i < n; i++){
+            if(wordList.get(i).getWord_target().toLowerCase().contains(str)
+            || wordList.get(i).getWord_target().contains(str)) {
+                System.out.print(wordList.get(i).getWord_target() + " ");
+            }
+        }
+    }
+
     //Phương thức dictionaryBasic
     public void dictionaryBasic() {
         dictionaryManagement.insertFromFile();
         System.out.println("Cac lenh: \"show\" de xem danh sach cac tu, \"add\" de them tu");
-        String command = scanner.next();
-        scanner.nextLine();
+        String command = scanner.nextLine();
         while (!command.equals("exit")) {
             if (command.equals("show")) {
                 showAllWords();
@@ -37,8 +50,9 @@ public class DictionaryCommandline {
                 Word word = new Word(newWord,mean);
                 dictionaryManagement.insertFromCommandline(word);
             }
-            command = scanner.next();
+            command = scanner.nextLine();
         }
+        dictionaryManagement.dictionaryExportToFile();
     }
 
     //Phương thức dictionaryAdvanced
@@ -57,8 +71,17 @@ public class DictionaryCommandline {
                 String word_target = scanner.next();
                 scanner.nextLine();
                 //Gọi phương thức tra từ
-                dictionaryManagement.dictionaryLookup(word_target);
-            }else{
+                System.out.println("Nghia cua tu "
+                                    + word_target + " la: "
+                                    + dictionaryManagement.dictionaryLookup(word_target));
+            } else if(command.equals("search")) {
+                System.out.print("Nhap tu: ");
+                String word_target = scanner.next();
+                scanner.nextLine();
+                //Gọi phương thức tim từ
+                dictionarySearcher(word_target);
+            } else
+            {
                 System.out.println("Lệnh không tồn tại! Xin hãy nhập lại!");
             }
             command = scanner.next();
