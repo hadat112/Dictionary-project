@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class DictionaryCommandline {
     //Khởi tạo đối tượng dictionaryManagement
-    private static DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    private static final DictionaryManagement dictionaryManagement = new DictionaryManagement();
     //Khởi tạo scanner để đọc input
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     //Hiển thị tất cả các từ trong mảng
     public void showAllWords() {
@@ -25,7 +25,7 @@ public class DictionaryCommandline {
         dictionaryManagement.insertFromFile();
         System.out.println("Cac lenh: \"show\" de xem danh sach cac tu, \"add\" de them tu");
         String command = scanner.next();
-        String s = scanner.nextLine();
+        scanner.nextLine();
         while (!command.equals("exit")) {
             if (command.equals("show")) {
                 showAllWords();
@@ -47,7 +47,7 @@ public class DictionaryCommandline {
         System.out.println("Vui lòng tắt Unikey trước khi nhập lệnh!");
         System.out.println("Các lệnh: \"show\" để xem danh sách các từ, \"lookup\" để tra từ, \"exit\" để thoát.");
         String command = scanner.next();
-        String s = scanner.nextLine();
+        scanner.nextLine();
         //Vòng lặp chạy lệnh command.
         while (!command.equals("exit")) {
             if (command.equals("show")) {
@@ -55,7 +55,7 @@ public class DictionaryCommandline {
             }else if(command.equals("lookup")){
                 System.out.print("Nhap tu: ");
                 String word_target = scanner.next();
-                s=scanner.nextLine();
+                scanner.nextLine();
                 //Gọi phương thức tra từ
                 dictionaryManagement.dictionaryLookup(word_target);
             }else{

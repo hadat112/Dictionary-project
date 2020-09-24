@@ -53,7 +53,7 @@ public class DictionaryManagement {
         //Duyệt từng phần tử để tìm từ có từng tiếng Anh tương ứng
         for(Word word : words){
             //Nếu tìm thấy gắn nó vào word_explain rồi thoát khỏi phương thức
-            if(word.getWord_target().equals(word_target)){
+            if(word.getWord_target().toLowerCase().equals(word_target) || word.getWord_target().equals(word_target)){
                 word_explain=word.getWord_explain();
                 System.out.println("Nghia cua tu "+word_target+" la: "+word_explain);
                 return;
