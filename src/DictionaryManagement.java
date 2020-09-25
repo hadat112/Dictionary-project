@@ -40,29 +40,33 @@ public class DictionaryManagement {
                 String[] str = string.split("   ");
                 insertFromCommandline(new Word(str[0], str[1]));
                 //System.out.println(str[0]+" "+str[1]);
+
             }
+            fileIn.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
         }
+
     }
 
+    //Sắp xếp từ từ mảng vào file
     public void dictionaryExportToFile() {
         try {
-            Formatter f = new Formatter("D:/java/Dictionary/File/Dictionary.txt");
+            Formatter fileOut = new Formatter("./File/Dictionary.txt");
 
             ArrayList<Word> words = dictionary.getWordsList();
             for(int i=0;i<dictionary.getSize();i++){
-                f.format("%s   %s   %s", words.get(i).getWord_target()
+                fileOut.format("%s   %s   %s", words.get(i).getWord_target()
                                     , words.get(i).getWord_explain(), "\r\n");
             }
-            f.close();
+            fileOut.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Error");
+            System.out.println("Error 1");
         }
     }
 
     //Tìm nghĩa tiếng Việt của từ tiếng Anh
-    public String dictionaryLookup(String word_target) {
+    public void dictionaryLookup(String word_target) {
         String word_explain = "";
         //Lấy mảng chứa các từ
         ArrayList<Word> words = dictionary.getWordsList();
@@ -71,12 +75,12 @@ public class DictionaryManagement {
             //Nếu tìm thấy gắn nó vào word_explain rồi thoát khỏi phương thức
             if (word.getWord_target().toLowerCase().equals(word_target) || word.getWord_target().equals(word_target)) {
                 word_explain = word.getWord_explain();
-                return word_explain;
+                System.out.println("Nghia cua tu \""+ word_target +"\" la: " + word_explain);
+                return;
             }
         }
         //Nếu không tìm thấy
         System.out.println("Không tìm thấy từ");
-        return word_explain;
     }
 
 }
