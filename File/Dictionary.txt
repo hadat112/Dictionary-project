@@ -1,9 +1,0 @@
-﻿Abstract   Trừu tượng
-Cat   Con Mèo   
-Dog   Con Chó   
-Cow   Con Bò   
-Hello   Xin chào   
-friend   bạn bè   
-Hi   Xin chào
-Helmet   Mũ sắt
-hell   địa ngục

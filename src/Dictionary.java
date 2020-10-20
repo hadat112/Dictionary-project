@@ -1,47 +1,58 @@
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Dictionary {
-    //Khởi tạo mảng động chứa các đối tượng word.
-    private static ArrayList<Word> words = new ArrayList<>();
+    private final String SPLITTING_CHAR = "<html>";
+    private final String E_V_FILE_PATH = "./file/E_V.txt";
+    private final String E_V_FILE_PATH_VE = "./file/V_E.txt";
+    private Map<String, Word> wordList = new TreeMap<>();
+    private Word word;
 
-    //Check tu
-    private boolean checkWord(Word word){
-        for(Word aWord : words){
-            if(aWord.getWord_target().equals(word.getWord_target())){
-                return true;
-            }
+    public void createWordList() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(E_V_FILE_PATH));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(SPLITTING_CHAR);
+            String[] subpath = parts[1].split("</html>");
+            parts[1] = "<html>" + parts[1];
+            wordList.put(parts[0], new Word(parts[0], parts[1]));
         }
-        return false;
     }
 
-    //Thêm từ vào mảng.
-    public void addWord(Word word){
-        if(checkWord(word)){
-            System.out.println("Tu da ton tai!");
-        }else
-            words.add(word);
+    public void createWordListVE() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(E_V_FILE_PATH_VE));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(SPLITTING_CHAR);
+            String[] subpath = parts[1].split("</html>");
+            parts[1] = "<html>" + parts[1];
+            wordList.put(parts[0], new Word(parts[0], parts[1]));
+        }
     }
 
-    //Xóa từ
-    public void deleteWord(Word word){
-        getWordsList().remove(word);
+    public Map<String, Word> getWordList() {
+        return wordList;
     }
 
-    //Lấy kích thước mảng, số lượng từ
-    public int getSize(){
-        return words.size();
+    public String getDef(String word) {
+        return wordList.get(word).getDef();
     }
 
-    //Lấy danh sách từ.
-    public ArrayList<Word> getWordsList(){
-        return words;
+    public void changeWord(String word, String newDef) {
+        wordList.put(word, new Word(word, newDef));
     }
 
-    /*public void setWords(ArrayList<Word> words) {
-        this.words = words;
-    }*/
+    public void addWord(Word newWord) {
+        wordList.put(newWord.getWord(), newWord);
+    }
 
-    public ArrayList<Word> getWords() {
-        return words;
+    public void deleteWord(String word) {
+        wordList.remove(word);
+    }
+    public void clearWords(){
+        wordList.clear();
     }
 }
