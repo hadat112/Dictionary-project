@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Formatter;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -19,6 +21,19 @@ public class Dictionary {
         }
     }
 
+    public void exportToFile() {
+        try {
+            Formatter fileOut = new Formatter(E_V_FILE_PATH);
+            for (Map.Entry<String, Word> entry : wordList.entrySet()) {
+                fileOut.format("%s%s%s", entry.getKey()
+                        , entry.getValue().getDef(), "\r\n");
+            }
+            fileOut.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error 1");
+        }
+    }
+
     public Map<String, Word> getWordList() {
         return wordList;
     }
@@ -29,5 +44,4 @@ public class Dictionary {
         }
         return null;
     }
-
 }
