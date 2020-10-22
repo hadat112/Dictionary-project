@@ -12,6 +12,8 @@ public class Controller {
     private DeletingFunction deletingFunction;
     private AddingFunction addingFunction;
     private ChangingFunction changingFunction;
+    private GoogleSearchingFunction googleSearchingFunction;
+    private VipFunction vipFunction;
 
     public void init(Scene scene) {
         root = new Root();
@@ -22,6 +24,8 @@ public class Controller {
         deletingFunction = new DeletingFunction(scene);
         addingFunction = new AddingFunction(scene);
         changingFunction = new ChangingFunction(scene);
+        googleSearchingFunction = new GoogleSearchingFunction(scene);
+        vipFunction = new VipFunction(scene);
     }
 
     public void initData() throws IOException {
@@ -38,6 +42,8 @@ public class Controller {
         deletingFunction.deleteWord(wordViewList, defView);
         addingFunction.setAddingBtn(wordViewList);
         changingFunction.setChangingBtn(wordViewList, defView);
+        googleSearchingFunction.setGoogleSearchBtn(defView, findField);
+        vipFunction.setVipBtn();
     }
 
     public void hideSearchView(Parent root) {

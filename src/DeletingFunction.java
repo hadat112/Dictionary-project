@@ -27,12 +27,16 @@ public class DeletingFunction extends Root {
 
         Optional<ButtonType> option = dltAlert.showAndWait();
 
-        if (option.get() == ButtonType.OK && getCurrent()!= null) {
+        if (getCurrent()!= null && option.get() == ButtonType.OK) {
             removeWord();
-            updateWordList();
             wordViewList.loadWords();
             defView.clearDefView();
         }
+    }
+
+    private void removeWord(){
+        getWordList().remove(getCurrent());
+        setCurrent("");
     }
 
 }

@@ -57,7 +57,6 @@ public class AddingFunction extends Root {
                         event.consume();
                     } else {
                         addWord(new Word(word, def));
-                        updateWordList();
                         wordViewList.loadWords();
                     }
                 }

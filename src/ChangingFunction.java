@@ -46,7 +46,7 @@ public class ChangingFunction extends Root {
                     String def = "<html><i>" + word + "</i><br/>" + "<ul><li><font color='#cc0000'><b>"
                             + textField1.getText() + "</b></font></li></ul></html>";
                     updateWord(new Word(word, def));
-                    updateWordList();
+                    //updateWordList();
                     wordViewList.loadWords();
                     defview.loadNewDef(def);
                     setCurrent(word);

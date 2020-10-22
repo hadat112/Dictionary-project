@@ -7,15 +7,13 @@ import java.util.TreeMap;
 public class Dictionary {
     private final String SPLITTING_CHAR = "<html>";
     private final String E_V_FILE_PATH = "./file/E_V.txt";
-    private Map<String, Word> wordList = new TreeMap<>();
-    private Word word;
+    private static Map<String, Word> wordList = new TreeMap<>();
 
     public void createWordList() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(E_V_FILE_PATH));
         String line;
         while ((line = br.readLine()) != null) {
             String[] parts = line.split(SPLITTING_CHAR);
-            String[] subpath = parts[1].split("</html>");
             parts[1] = "<html>" + parts[1];
             wordList.put(parts[0], new Word(parts[0], parts[1]));
         }
@@ -32,15 +30,4 @@ public class Dictionary {
         return null;
     }
 
-    public void changeWord(String word, String newDef) {
-        wordList.put(word, new Word(word, newDef));
-    }
-
-    public void addWord(String word, String def) {
-        wordList.put(word, new Word(word, def));
-    }
-
-    public void deleteWord(String word) {
-        wordList.remove(word);
-    }
 }

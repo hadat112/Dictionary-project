@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class Root {
     private static Dictionary dictionary = new Dictionary();
-    private static Map<String, Word> wordList;
+
     private static String current = "Invalid input";
 
     public void setCurrent(String current) {
@@ -14,16 +14,16 @@ public class Root {
     }
 
     public static Map<String, Word> getWordList() {
-        return wordList;
+        return dictionary.getWordList();
     }
 
-    public void updateWordList(){
+    /*public void updateWordList(){
         wordList = dictionary.getWordList();
-    }
+    }*/
 
     public void createWordList() throws IOException {
         dictionary.createWordList();
-        updateWordList();
+        //updateWordList();
     }
 
     public String findDef(String word) {
@@ -34,8 +34,4 @@ public class Root {
         System.out.println(current);
     }
 
-    public void removeWord(){
-        dictionary.deleteWord(current);
-        setCurrent("");
-    }
 }
