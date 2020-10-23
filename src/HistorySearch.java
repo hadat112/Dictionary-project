@@ -11,12 +11,14 @@ public class HistorySearch {
     private final String HISTORY_FILE_PATH = "./file/history.txt";
     private static List<String> wordSearchList = new ArrayList<>();
     private List<String> historySearch = new ArrayList<>();
+    private short num = 0;
 
     public void loadHistory() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(HISTORY_FILE_PATH));
         String line;
         while ((line = br.readLine()) != null) {
             wordSearchList.add(line);
+            num++;
         }
         updateHistory();
     }
@@ -24,6 +26,8 @@ public class HistorySearch {
     public void addToHistory(String word){
         if(wordSearchList.contains(word)){
             wordSearchList.remove(word);
+        }else{
+            if(num >=20) wordSearchList.remove(0);
         }
         wordSearchList.add(word);
         updateHistory();
@@ -38,4 +42,18 @@ public class HistorySearch {
     public List<String> getHistory(){
         return historySearch;
     }
+
+   /* public void saveChange(){
+        try {
+            Formatter fileOut = new Formatter(HISTORY_FILE_PATH);
+            for (String word : wordSearchList) {
+                fileOut.format("%s%s%s", entry.getKey()
+                        , entry.getValue().getDef(), "\r\n");
+            }
+            fileOut.close();
+            System.out.println("Saved");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+        }
+    }*/
 }
