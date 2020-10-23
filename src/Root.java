@@ -9,37 +9,47 @@ public class Root {
 
     private static String current = "";
 
+    //Set từ hiện tại
     public void setCurrent(String current) {
         this.current = current;
     }
+
+    //Lấy ra từ hiện tại
     public String getCurrent(){
         return current;
     }
 
+    //Lấy ra wordList
     public static Map<String, Word> getWordList() {
         return dictionary.getWordList();
     }
 
+    //Khởi tạo wordList
     public void createWordList() throws IOException {
         dictionary.createWordList();
     }
 
+    //Tìm nghĩa
     public String findDef(String word) {
         return dictionary.getDef(word);
     }
 
+    //Load lịch siwr tìm kiếm
     public void loadHistorySearch() throws IOException {
         historySearch.loadHistory();
     }
 
+    //Thêm vào lịch sử tìm kiếm
     public void addToHistorySearch(String word){
         historySearch.addToHistory(word);
     }
 
+    //Lấy ra lịch sử tìm kiếm
     public List<String> getHistory(){
         return historySearch.getHistory();
     }
 
+    //Đặt thay đổi để lưu file
     public void setChanged(){
         changed = true;
     }

@@ -1,18 +1,15 @@
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 public class FindField extends Root {
-    @FXML
     private final TextField findTextField;
-    @FXML
     private final Button findingBtn;
-    @FXML
     private final ListView<String> searchView;
 
     private Map<String, Word> searchList = new TreeMap<>();
@@ -21,6 +18,7 @@ public class FindField extends Root {
     private final String findingBtnTag = "#find";
     private final String searchViewTag = "#searchView";
 
+    //Khởi tạo
     public FindField(Scene scene) {
         findTextField = (TextField) scene.lookup(findTexFieldTag);
         findingBtn = (Button) scene.lookup(findingBtnTag);
@@ -28,11 +26,13 @@ public class FindField extends Root {
         hideSearchView();
     }
 
+    //Lấy text từ textField
     public String getFindFieldValue() {
         return findTextField.getText();
     }
 
-    public void loadDefToDefView(DefView defView, WordViewList wordViewList) {
+    //Click để tìm kiếm
+    public void clickToFindDef(DefView defView, WordViewList wordViewList) {
         findingBtn.setOnAction(e -> {
             hideSearchView();
             String word = getFindFieldValue();
@@ -44,21 +44,41 @@ public class FindField extends Root {
         });
     }
 
+    //Enter để tìm kiếm
+    public void enterToFindDef(DefView defView, WordViewList wordViewList) {
+        findTextField.setOnKeyPressed(e -> {
+            if(e.getCode() == KeyCode.ENTER){
+                hideSearchView();
+                String word = getFindFieldValue();
+                setCurrent(word);
+                addToHistorySearch(word);
+                wordViewList.jumpTo(word);
+                String def = findDef(getCurrent());
+                defView.representDef(def);
+            }
+        });
+    }
+
+    //Bắt sự kiện khi nhập từ
     public void addListenerToTextField(DefView defView, WordViewList wordViewList) {
         findTextField.textProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (!newValue.equals("")) {
+                        System.out.println(newValue);
                         searchWord(newValue);
                         loadSearchWords();
                         loadSearchViewList(defView, wordViewList);
+                        showSearchView();
                     } else {
                         searchList.clear();
                         loadHistory();
                     }
                 }
         );
+
     }
 
+    //Tìm từ
     private void searchWord(String word) {
         searchList.clear();
         for (String key : getWordList().keySet()) {
@@ -68,16 +88,19 @@ public class FindField extends Root {
         }
     }
 
+    //Load danh sách các từ cần tìm
     private void loadSearchWords() {
         searchView.getItems().clear();
         searchView.getItems().addAll(searchList.keySet());
     }
 
+    //Load lịch sử tìm kiếm
     private void loadHistory() {
         searchView.getItems().clear();
         searchView.getItems().addAll(getHistory());
     }
 
+    //Hiển thị lich sử tìm kiếm và bắt sự kiện khi click vào từ
     private void loadSearchViewList(DefView defView, WordViewList wordViewList) {
         searchView.setOnMouseClicked(e -> {
             String temp = searchView.getSelectionModel().getSelectedItem();
@@ -91,19 +114,22 @@ public class FindField extends Root {
         });
     }
 
+    //Bắt sự kiện khi ấn vào textField
     public void setMouseEventToSearchView() {
         findTextField.setOnMouseClicked(e -> {
-            searchView.setVisible(true);
+            showSearchView();
             if(getFindFieldValue().equals("")){
                 loadHistory();
             }
         });
     }
 
+    //Hiện trang tìm kiếm
     public void showSearchView() {
         searchView.setVisible(true);
     }
 
+    //Ẩn trang tìm kiếm
     public void hideSearchView() {
         searchView.setVisible(false);
     }

@@ -9,6 +9,7 @@ public class GoogleTranslate {
     private static final String ENG_LANG = "en";
     private static final String VIE_LANG = "vi";
 
+    //API translate
     public static String translate(String text) throws IOException {
         // INSERT YOU URL HERE
         String urlStr = "https://script.google.com/macros/s/AKfycbxueKM8M8EMiiQYoYEmTZZR3L-TQ61S65DVeNvUo5DaxWbFUgw5/exec" +

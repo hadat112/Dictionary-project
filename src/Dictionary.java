@@ -10,8 +10,8 @@ public class Dictionary {
     private final String SPLITTING_CHAR = "<html>";
     private final String E_V_FILE_PATH = "./file/E_V.txt";
     private static Map<String, Word> wordList = new TreeMap<>();
-    private static boolean changed = false;
 
+    //Load từ và nghĩa từ file vào TreeMap
     public void createWordList() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(E_V_FILE_PATH));
         String line;
@@ -22,6 +22,7 @@ public class Dictionary {
         }
     }
 
+    //Lấy ra danh sách từ a.k.a wordList
     public Map<String, Word> getWordList() {
         return wordList;
     }
@@ -33,7 +34,7 @@ public class Dictionary {
         return null;
     }
 
-
+    //Lưu vào file
     public void exportToFile() {
         try {
             Formatter fileOut = new Formatter(E_V_FILE_PATH);

@@ -7,26 +7,31 @@ import java.util.Optional;
 
 public class AddingFunction extends Root {
     private Button addingBtn;
-    private String tag = "#add";
+    private final String ADD_TAG = "#add";
 
+    //Khởi tạo nút thêm từ
     public AddingFunction(Scene scene) {
-        addingBtn = (Button) scene.lookup(tag);
+        addingBtn = (Button) scene.lookup(ADD_TAG);
     }
 
+    //Thêm sự kiện khi ấn nút thêm
     public void setAddingBtn(WordViewList wordViewList) {
         addingBtn.setOnMouseClicked(e -> {
             showInputDialog(wordViewList);
         });
     }
 
+    //Kiểm tra từ đó có trong danh sách từ không
     private boolean checkWord(String word) {
         return getWordList().containsKey(word);
     }
 
+    //Thêm từ vào từ điển
     private void addWord(Word word) {
         getWordList().put(word.getWord(), word);
     }
 
+    //Hiện bảng thêm từ và thêm nghĩa
     public void showInputDialog(WordViewList wordViewList) {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Add a word to dictionary");
@@ -66,6 +71,7 @@ public class AddingFunction extends Root {
         dialog.showAndWait();
     }
 
+    //Cảnh báo nếu định thêm từ trùng lặp
     public void showWarning(String word) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
