@@ -27,7 +27,9 @@ public class HistorySearch {
         if(wordSearchList.contains(word)){
             wordSearchList.remove(word);
         }else{
-            if(num >=20) wordSearchList.remove(0);
+            num++;
+            if(num >=30)
+                wordSearchList.remove(0);
         }
         wordSearchList.add(word);
         updateHistory();
