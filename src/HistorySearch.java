@@ -9,27 +9,33 @@ import java.util.List;
 
 public class HistorySearch {
     private final String HISTORY_FILE_PATH = "./file/history.txt";
-    private List<String> historyList = new ArrayList<>();
-    private List<String> reverse = new ArrayList<>();
+    private static List<String> wordSearchList = new ArrayList<>();
+    private List<String> historySearch = new ArrayList<>();
 
     public void loadHistory() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(HISTORY_FILE_PATH));
         String line;
         while ((line = br.readLine()) != null) {
-            historyList.add(line);
+            wordSearchList.add(line);
         }
+        updateHistory();
     }
 
     public void addToHistory(String word){
-        if(historyList.contains(word)){
-            historyList.remove(word);
+        if(wordSearchList.contains(word)){
+            wordSearchList.remove(word);
         }
-        historyList.add(word);
+        wordSearchList.add(word);
+        updateHistory();
+    }
+
+    private void updateHistory(){
+        historySearch.clear();
+        historySearch.addAll(wordSearchList);
+        Collections.reverse(historySearch);
     }
 
     public List<String> getHistory(){
-        reverse = historyList;
-        Collections.reverse(reverse);
-        return reverse;
+        return historySearch;
     }
 }

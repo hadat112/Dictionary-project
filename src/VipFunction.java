@@ -1,9 +1,6 @@
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-
-import java.util.Optional;
 
 public class VipFunction {
     private Button vipBtn;
@@ -25,9 +22,7 @@ public class VipFunction {
         alert.setHeaderText("Want to become VIP?");
         alert.setContentText("Pay 1.000$ to become VIP.1!");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            alert.hide();
-        }
+        alert.showAndWait();
+
     }
 }

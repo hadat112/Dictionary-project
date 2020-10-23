@@ -31,6 +31,7 @@ public class DeletingFunction extends Root {
             removeWord();
             wordViewList.loadWords();
             defView.clearDefView();
+            setChanged();
         }
     }
 

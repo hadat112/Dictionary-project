@@ -4,9 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class FindField extends Root{
+public class FindField extends Root {
     @FXML
     private final TextField findTextField;
     @FXML
@@ -15,30 +16,28 @@ public class FindField extends Root{
     private final ListView<String> searchView;
 
     private Map<String, Word> searchList = new TreeMap<>();
-    private List<String> history = new ArrayList<>();
-    private List<String> reverse = new ArrayList<>();
 
     private final String findTexFieldTag = "#textField";
     private final String findingBtnTag = "#find";
     private final String searchViewTag = "#searchView";
 
-    public FindField(Scene scene){
+    public FindField(Scene scene) {
         findTextField = (TextField) scene.lookup(findTexFieldTag);
         findingBtn = (Button) scene.lookup(findingBtnTag);
         searchView = (ListView<String>) scene.lookup(searchViewTag);
         hideSearchView();
     }
 
-    public String getFindFieldValue(){
+    public String getFindFieldValue() {
         return findTextField.getText();
     }
 
-    public void loadDefToDefView(DefView defView, WordViewList wordViewList){
+    public void loadDefToDefView(DefView defView, WordViewList wordViewList) {
         findingBtn.setOnAction(e -> {
             hideSearchView();
             String word = getFindFieldValue();
             setCurrent(word);
-            addWordToHistory(word);
+            addToHistorySearch(word);
             wordViewList.jumpTo(word);
             String def = findDef(getCurrent());
             defView.representDef(def);
@@ -74,17 +73,15 @@ public class FindField extends Root{
         searchView.getItems().addAll(searchList.keySet());
     }
 
-    private void loadHistory(){
-        reverse = history;
-        Collections.reverse(reverse);
+    private void loadHistory() {
         searchView.getItems().clear();
-        searchView.getItems().addAll(reverse);
+        searchView.getItems().addAll(getHistory());
     }
 
     private void loadSearchViewList(DefView defView, WordViewList wordViewList) {
         searchView.setOnMouseClicked(e -> {
             String temp = searchView.getSelectionModel().getSelectedItem();
-            addWordToHistory(temp);
+            addToHistorySearch(temp);
             wordViewList.jumpTo(temp);
             setCurrent(temp);
             String def = findDef(getCurrent());
@@ -95,24 +92,21 @@ public class FindField extends Root{
     }
 
     public void setMouseEventToSearchView() {
-        this.findTextField.setOnMouseClicked(e -> {
+        findTextField.setOnMouseClicked(e -> {
             searchView.setVisible(true);
+            if(getFindFieldValue().equals("")){
+                loadHistory();
+            }
         });
     }
 
-    public void showSearchView(){
+    public void showSearchView() {
         searchView.setVisible(true);
     }
 
-    public void hideSearchView(){
+    public void hideSearchView() {
         searchView.setVisible(false);
     }
 
-    private void addWordToHistory(String word){
-        if(history.contains(word)){
-            history.remove(word);
-        }
-        history.add(word);
-    }
 
 }

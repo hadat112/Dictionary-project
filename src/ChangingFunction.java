@@ -19,6 +19,7 @@ public class ChangingFunction extends Root {
     public void setChangingBtn(WordViewList wordViewList, DefView defView) {
         changingBtn.setOnMouseClicked(e -> {
             showChangingDialog(wordViewList, defView);
+            setChanged();
         });
     }
 
@@ -46,7 +47,6 @@ public class ChangingFunction extends Root {
                     String def = "<html><i>" + word + "</i><br/>" + "<ul><li><font color='#cc0000'><b>"
                             + textField1.getText() + "</b></font></li></ul></html>";
                     updateWord(new Word(word, def));
-                    //updateWordList();
                     wordViewList.loadWords();
                     defview.loadNewDef(def);
                     setCurrent(word);

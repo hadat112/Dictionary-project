@@ -58,6 +58,7 @@ public class AddingFunction extends Root {
                     } else {
                         addWord(new Word(word, def));
                         wordViewList.loadWords();
+                        setChanged();
                     }
                 }
         );

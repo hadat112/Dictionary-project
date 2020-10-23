@@ -8,12 +8,7 @@ public class DictionaryApp extends Application {
 
     private static final String FXML_FILE_PATH = "JavaFx.fxml";
     private static Controller controller = new Controller();
-
-    @Override
-    public void stop() throws Exception {
-        controller.getRoot().exportToFile();
-        super.stop();
-    }
+    private Dictionary dic = new Dictionary();
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -36,4 +31,15 @@ public class DictionaryApp extends Application {
 
     }
 
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        if(controller.getChanged()){
+            dic.exportToFile();
+            System.out.println("Save changed");
+        }else{
+            System.out.println("nothing changed");
+        }
+
+    }
 }

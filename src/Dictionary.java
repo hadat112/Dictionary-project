@@ -10,6 +10,7 @@ public class Dictionary {
     private final String SPLITTING_CHAR = "<html>";
     private final String E_V_FILE_PATH = "./file/E_V.txt";
     private static Map<String, Word> wordList = new TreeMap<>();
+    private static boolean changed = false;
 
     public void createWordList() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(E_V_FILE_PATH));
@@ -18,19 +19,6 @@ public class Dictionary {
             String[] parts = line.split(SPLITTING_CHAR);
             parts[1] = "<html>" + parts[1];
             wordList.put(parts[0], new Word(parts[0], parts[1]));
-        }
-    }
-
-    public void exportToFile() {
-        try {
-            Formatter fileOut = new Formatter(E_V_FILE_PATH);
-            for (Map.Entry<String, Word> entry : wordList.entrySet()) {
-                fileOut.format("%s%s%s", entry.getKey()
-                        , entry.getValue().getDef(), "\r\n");
-            }
-            fileOut.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Error 1");
         }
     }
 
@@ -44,4 +32,20 @@ public class Dictionary {
         }
         return null;
     }
+
+
+    public void exportToFile() {
+        try {
+            Formatter fileOut = new Formatter(E_V_FILE_PATH);
+            for (Map.Entry<String, Word> entry : wordList.entrySet()) {
+                fileOut.format("%s%s%s", entry.getKey()
+                        , entry.getValue().getDef(), "\r\n");
+            }
+            fileOut.close();
+            System.out.println("Saved");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+        }
+    }
 }
+
