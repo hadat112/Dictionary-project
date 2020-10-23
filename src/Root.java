@@ -26,6 +26,10 @@ public class Root {
         //updateWordList();
     }
 
+    public void exportToFile() {
+        dictionary.exportToFile();
+    }
+
     public String findDef(String word) {
         return dictionary.getDef(word);
     }

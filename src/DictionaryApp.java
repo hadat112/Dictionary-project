@@ -9,6 +9,12 @@ public class DictionaryApp extends Application {
     private static final String FXML_FILE_PATH = "JavaFx.fxml";
     private static Controller controller = new Controller();
 
+    @Override
+    public void stop() throws Exception {
+        controller.getRoot().exportToFile();
+        super.stop();
+    }
+
     public static void main(String[] args) {
         Application.launch(args);
     }
