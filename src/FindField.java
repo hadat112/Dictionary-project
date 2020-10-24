@@ -4,6 +4,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -12,7 +14,8 @@ public class FindField extends Root {
     private final Button findingBtn;
     private final ListView<String> searchView;
 
-    private Map<String, Word> searchList = new TreeMap<>();
+    //private Map<String, Word> searchList = new TreeMap<>();
+    private List<String> searchList = new ArrayList<>();
 
     private final String findTexFieldTag = "#textField";
     private final String findingBtnTag = "#find";
@@ -83,7 +86,7 @@ public class FindField extends Root {
         searchList.clear();
         for (String key : getWordList().keySet()) {
             if (key.startsWith(word)) {
-                searchList.put(key, getWordList().get(key));
+                searchList.add(key);
             }
         }
     }
@@ -91,7 +94,7 @@ public class FindField extends Root {
     //Load danh sách các từ cần tìm
     private void loadSearchWords() {
         searchView.getItems().clear();
-        searchView.getItems().addAll(searchList.keySet());
+        searchView.getItems().addAll(searchList);
     }
 
     //Load lịch sử tìm kiếm
