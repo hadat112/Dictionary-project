@@ -7,18 +7,23 @@ import java.util.Optional;
 
 public class DeletingFunction extends Root {
     private final Button dltBtn;
-    private final String tag = "#delete";
+    private final String DELETE_TAG = "#delete";
 
+    //Khởi tạo nút xóa
     public DeletingFunction(Scene scene) {
-        dltBtn = (Button) scene.lookup(tag);
+        dltBtn = (Button) scene.lookup(DELETE_TAG);
     }
 
-    public void deleteWord(WordViewList wordViewList, DefView defView) {
+    //Tạo bắt sự kiện cho nút xóa
+    public void setDeletingFunction(WordViewList wordViewList, DefView defView) {
         dltBtn.setOnMouseClicked(e -> {
-            showAlert(wordViewList, defView);
+            if(!getCurrent().equals("") && getCurrent() != null){
+                showAlert(wordViewList, defView);
+            }
         });
     }
 
+    //Hiển thị cảnh báo hỏi xem có muốn xóa không
     private void showAlert(WordViewList wordViewList, DefView defView) {
         Alert dltAlert = new Alert(Alert.AlertType.CONFIRMATION);
         dltAlert.setTitle("Delete word");
@@ -35,6 +40,7 @@ public class DeletingFunction extends Root {
         }
     }
 
+    //Xóa từ ra khỏi từ điển
     private void removeWord(){
         getWordList().remove(getCurrent());
         setCurrent("");

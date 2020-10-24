@@ -36,11 +36,12 @@ public class Controller {
     }
 
     public void addFunction() {
-        findField.loadDefToDefView(defView, wordViewList);
+        findField.clickToFindDef(defView, wordViewList);
         findField.addListenerToTextField(defView, wordViewList);
         findField.setMouseEventToSearchView();
+        findField.enterToFindDef(defView, wordViewList);
         spellingFunction.spellCurrentWord(root);
-        deletingFunction.deleteWord(wordViewList, defView);
+        deletingFunction.setDeletingFunction(wordViewList, defView);
         addingFunction.setAddingBtn(wordViewList);
         changingFunction.setChangingBtn(wordViewList, defView);
         googleSearchingFunction.setGoogleSearchBtn(defView, findField);

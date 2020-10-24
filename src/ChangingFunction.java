@@ -5,17 +5,19 @@ import javafx.scene.layout.GridPane;
 
 public class ChangingFunction extends Root {
     private Button changingBtn;
-    private String tag = "#change";
+    private String CHANGE_TAG = "#change";
 
+    //Khởi tạo thay đổi nghĩa của từ
     public ChangingFunction(Scene scene) {
-        changingBtn = (Button) scene.lookup(tag);
+        changingBtn = (Button) scene.lookup(CHANGE_TAG);
     }
 
+    //Cập nhật nghĩa mới cho từ
     private void updateWord(Word word) {
         getWordList().put(word.getWord(), word);
     }
 
-
+    //Thêm bắt sự kiện click cho nút
     public void setChangingBtn(WordViewList wordViewList, DefView defView) {
         changingBtn.setOnMouseClicked(e -> {
             showChangingDialog(wordViewList, defView);
@@ -23,6 +25,7 @@ public class ChangingFunction extends Root {
         });
     }
 
+    //Hiện bảng đổi từ
     public void showChangingDialog(WordViewList wordViewList, DefView defview) {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Change word's definition to dictionary");

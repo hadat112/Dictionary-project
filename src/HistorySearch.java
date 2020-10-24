@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.Formatter;
+import java.util.List;
+
 
 public class HistorySearch {
     private final String HISTORY_FILE_PATH = "./file/history.txt";
@@ -12,6 +14,7 @@ public class HistorySearch {
     private List<String> historySearch = new ArrayList<>();
     private short num = 0;
 
+    //Load lịch sử tìm kiếm từ file
     public void loadHistory() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(HISTORY_FILE_PATH));
         String line;
@@ -47,12 +50,14 @@ public class HistorySearch {
         updateHistory();
     }
 
+    //Cập nhật lịch sử tìm kiếm sau khi thêm
     private void updateHistory(){
         historySearch.clear();
         historySearch.addAll(wordSearchList);
         Collections.reverse(historySearch);
     }
 
+    //Lấy lịch sử tìm kiếm
     public List<String> getHistory(){
         return historySearch;
     }
