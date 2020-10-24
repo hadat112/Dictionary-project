@@ -19,8 +19,8 @@ public class VipFunction {
     public void showVipInformation(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("V.I.P");
-        alert.setHeaderText("Want to become VIP?");
-        alert.setContentText("Pay 1.000$ to become VIP.1!");
+        alert.setHeaderText("Want to become VIP? Pay 1.000$ to become VIP.1!");
+        alert.setContentText("-No more ads! \n"+"-Can store up to 50 words! \n" + "-And more amazing functions!");
 
         alert.showAndWait();
 

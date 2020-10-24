@@ -6,8 +6,6 @@ import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class FindField extends Root {
     private final TextField findTextField;
@@ -67,7 +65,6 @@ public class FindField extends Root {
         findTextField.textProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (!newValue.equals("")) {
-                        System.out.println(newValue);
                         searchWord(newValue);
                         loadSearchWords();
                         loadSearchViewList(defView, wordViewList);
@@ -104,7 +101,7 @@ public class FindField extends Root {
     }
 
     //Hiển thị lich sử tìm kiếm và bắt sự kiện khi click vào từ
-    private void loadSearchViewList(DefView defView, WordViewList wordViewList) {
+    public void loadSearchViewList(DefView defView, WordViewList wordViewList) {
         searchView.setOnMouseClicked(e -> {
             String temp = searchView.getSelectionModel().getSelectedItem();
             addToHistorySearch(temp);
