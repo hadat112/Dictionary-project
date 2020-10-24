@@ -9,6 +9,7 @@ public class DictionaryApp extends Application {
     private static final String FXML_FILE_PATH = "JavaFx.fxml";
     private static Controller controller = new Controller();
     private Dictionary dic = new Dictionary();
+    private HistorySearch his = new HistorySearch();
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -35,6 +36,7 @@ public class DictionaryApp extends Application {
     public void stop() throws Exception {
         super.stop();
         if(controller.getChanged()){
+            his.saveHistory();
             dic.exportToFile();
             System.out.println("Save changed");
         }else{

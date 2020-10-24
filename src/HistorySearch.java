@@ -1,11 +1,10 @@
 
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class HistorySearch {
     private final String HISTORY_FILE_PATH = "./file/history.txt";
@@ -21,6 +20,19 @@ public class HistorySearch {
             num++;
         }
         updateHistory();
+    }
+
+    public void saveHistory() {
+        try {
+            Formatter fileOut = new Formatter(HISTORY_FILE_PATH);
+            for (int i = 0; i < wordSearchList.size(); i++){
+                fileOut.format("%s \n", wordSearchList.get(i));
+            }
+            fileOut.close();
+            System.out.println("Saved");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+        }
     }
 
     public void addToHistory(String word){
