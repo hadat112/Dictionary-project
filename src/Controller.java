@@ -13,6 +13,7 @@ public class Controller {
     private AddingFunction addingFunction;
     private ChangingFunction changingFunction;
     private GoogleSearchingFunction googleSearchingFunction;
+    private User user;
     private VipFunction vipFunction;
 
     public void init(Scene scene) {
@@ -26,6 +27,7 @@ public class Controller {
         changingFunction = new ChangingFunction(scene);
         googleSearchingFunction = new GoogleSearchingFunction(scene);
         vipFunction = new VipFunction(scene);
+        user = new User(scene);
     }
 
     public void initData() throws IOException {
@@ -39,6 +41,7 @@ public class Controller {
         findField.clickToFindDef(defView, wordViewList);
         findField.addListenerToTextField(defView, wordViewList);
         findField.setMouseEventToSearchView();
+        findField.loadSearchViewList(defView, wordViewList);
         findField.enterToFindDef(defView, wordViewList);
         spellingFunction.spellCurrentWord(root);
         deletingFunction.setDeletingFunction(wordViewList, defView);
@@ -46,6 +49,7 @@ public class Controller {
         changingFunction.setChangingBtn(wordViewList, defView);
         googleSearchingFunction.setGoogleSearchBtn(defView, findField);
         vipFunction.setVipBtn();
+        user.setUserBtn();
     }
 
     public void hideSearchView(Parent root) {
