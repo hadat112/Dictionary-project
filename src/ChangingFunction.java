@@ -20,8 +20,10 @@ public class ChangingFunction extends Root {
     //Thêm bắt sự kiện click cho nút
     public void setChangingBtn(WordViewList wordViewList, DefView defView) {
         changingBtn.setOnMouseClicked(e -> {
-            showChangingDialog(wordViewList, defView);
-            setChanged();
+            if(!getCurrent().equals("")){
+                showChangingDialog(wordViewList, defView);
+                setChanged();
+            }
         });
     }
 
